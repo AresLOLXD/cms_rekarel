@@ -8,6 +8,9 @@ setup(
         "cms.grading.languages": [
             "KarelJava=karel.language:KarelJava",
             "KarelPascal=karel.language:KarelPascal",
+        ],
+        "cms.grading.tasktypes": [
+            "KarelTask=karel.task:KarelTask",
         ]
     }
 )
