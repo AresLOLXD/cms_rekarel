@@ -38,7 +38,7 @@ This package adds two things
 * Karel languages
 * Karel task type.
 
-A Karel task type it's a slightly modified version of a [batch](https://cms.readthedocs.io/en/latest/Task%20types.html#batch) task that changes the task output so Instruction Limit Exceeded and RTE are correctly displayed. 
+A Karel task type is a slightly modified version of a [batch](https://cms.readthedocs.io/en/latest/Task%20types.html#batch) task that changes the task output so Instruction Limit Exceeded and RTE are correctly displayed. 
 
 
 
