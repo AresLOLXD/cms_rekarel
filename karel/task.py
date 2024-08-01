@@ -138,7 +138,7 @@ class KarelTask(Batch):
         if (stats["exit_status"] == Sandbox.EXIT_NONZERO_RETURN):
             exit_signal = sandbox.get_exit_code()            
             if exit_signal == 16:
-                job.text = [N_("Runtime Error (Karel Crashed into a wall)")]
+                job.text = [N_("Runtime Error (Karel crashed into a wall)")]
             elif exit_signal == 17:
                 job.text = [N_("Runtime Error (Karel tried to pick a beeper from an empty position)")]
             elif exit_signal == 18:
