@@ -136,9 +136,25 @@ class KarelTask(Batch):
         job.outcome = str(outcome) if outcome is not None else None
         job.text = text
         if (stats["exit_status"] == Sandbox.EXIT_NONZERO_RETURN):
-            exit_signal = sandbox.get_exit_code()
-            if exit_signal == 1:
-                job.text = [N_("Instruction limit exceeded")]
+            exit_signal = sandbox.get_exit_code()            
+            if exit_signal == 16:
+                job.text = [N_("Runtime Error (Karel Crashed into a wall)")]
+            elif exit_signal == 17:
+                job.text = [N_("Runtime Error (Karel tried to pick a beeper from an empty position)")]
+            elif exit_signal == 18:
+                job.text = [N_("Runtime Error (Karel tried to put a beeper with an empty bag)")]
+            elif exit_signal == 19:
+                job.text = [N_("Runtime Error (The stack overflowed)")]
+            elif exit_signal == 48:
+                job.text = [N_("Instruction Limit Exceeded (Too many overall)")]
+            elif exit_signal == 49:
+                job.text = [N_("Instruction Limit Exceeded (Too many lefts)")]
+            elif exit_signal == 50:
+                job.text = [N_("Instruction Limit Exceeded (Too many moves)")]
+            elif exit_signal == 51:
+                job.text = [N_("Instruction Limit Exceeded (Too many pickbeepers)")]
+            elif exit_signal == 52:
+                job.text = [N_("Instruction Limit Exceeded (Too many putbeepers)")]
         job.plus = stats
 
         delete_sandbox(sandbox, job.success, job.keep_sandbox)
