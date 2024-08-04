@@ -138,23 +138,23 @@ class KarelTask(Batch):
         if (stats["exit_status"] == Sandbox.EXIT_NONZERO_RETURN):
             exit_signal = sandbox.get_exit_code()            
             if exit_signal == 16:
-                job.text = [N_("Runtime Error (Karel crashed into a wall)")]
+                job.text = [N_("Error de ejecución (Karel chocó con un muro)")]
             elif exit_signal == 17:
-                job.text = [N_("Runtime Error (Karel tried to pick a beeper from an empty position)")]
+                job.text = [N_("Error de ejecución (Karel intentó recoger un zumbador de una posición vacía)")]
             elif exit_signal == 18:
-                job.text = [N_("Runtime Error (Karel tried to put a beeper with an empty bag)")]
+                job.text = [N_("Error de ejecución (Karel intentó dejar un zumbador con su mochila vacía)")]
             elif exit_signal == 19:
-                job.text = [N_("Runtime Error (The stack overflowed)")]
+                job.text = [N_("Error de ejecución (La pila de llamadas se desbordó)")]
             elif exit_signal == 48:
-                job.text = [N_("Instruction Limit Exceeded (Too many overall)")]
+                job.text = [N_("Límite de instrucciones excedido (Demasiadas en general)")]
             elif exit_signal == 49:
-                job.text = [N_("Instruction Limit Exceeded (Too many lefts)")]
+                job.text = [N_("Límite de instrucciones excedido (Demasiadas izquierdas)")]
             elif exit_signal == 50:
-                job.text = [N_("Instruction Limit Exceeded (Too many moves)")]
+                job.text = [N_("Límite de instrucciones excedido (Demasiados avanzas)")]
             elif exit_signal == 51:
-                job.text = [N_("Instruction Limit Exceeded (Too many pickbeepers)")]
+                job.text = [N_("Límite de instrucciones excedido (Demasiados coge-zumbadores)")]
             elif exit_signal == 52:
-                job.text = [N_("Instruction Limit Exceeded (Too many putbeepers)")]
+                job.text = [N_("Límite de instrucciones excedido (Demasiados deja-zumbadores)")]
         job.plus = stats
 
         delete_sandbox(sandbox, job.success, job.keep_sandbox)
