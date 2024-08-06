@@ -15,7 +15,7 @@ class KarelLanguage(Language):
     
     @property
     def source_extensions(self):
-        return ["kc", "kj", "kp", "txt"]
+        return [".kc", ".kj", ".kp", ".txt"]
     
     @property
     def executable_extension(self):
@@ -48,7 +48,7 @@ class KarelPascal(KarelLanguage):
 
     @property
     def source_extensions(self):
-        return ["kp"]
+        return [".kp"]
 
 class KarelJava(KarelLanguage):
 
@@ -58,4 +58,4 @@ class KarelJava(KarelLanguage):
 
     @property
     def source_extensions(self):
-        return ["kj"]
+        return [".kj"]
