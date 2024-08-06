@@ -6,8 +6,7 @@ setup(
     packages=find_packages(),
     entry_points={
         "cms.grading.languages": [
-            "KarelJava=karel.language:KarelJava",
-            "KarelPascal=karel.language:KarelPascal",
+            "KarelLanguage=karel.language:KarelLanguage"
         ],
         "cms.grading.tasktypes": [
             "KarelTask=karel.task:KarelTask",
