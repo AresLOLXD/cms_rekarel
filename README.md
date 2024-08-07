@@ -27,10 +27,12 @@ Next, let's install the interpreter.
 
 Download https://github.com/kishtarn555/rekarel-cpp-interpreter
 
-Run  `make karel` to compile the project.
+Go to the download/clone folder and run:
 
 Then 
 ```
+mkdir bin
+make karel
 cd bin
 install -m 755 karel /usr/local/bin
 ```
