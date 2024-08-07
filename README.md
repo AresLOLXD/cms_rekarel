@@ -34,7 +34,7 @@ Then
 mkdir bin
 make karel
 cd bin
-install -m 755 karel /usr/local/bin
+sudo install -m 755 karel /usr/local/bin
 ```
 
 ## Karel for CMS
