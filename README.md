@@ -23,6 +23,18 @@ And
 
 It should be in `/usr/local/bin/rekarel`, otherwise, you'll have to move it.
 
+Next, let's install the interpreter.
+
+Download https://github.com/kishtarn555/rekarel-cpp-interpreter
+
+Run  `make karel` to compile the project.
+
+Then 
+```
+cd bin
+install -m 755 karel /usr/local/bin
+```
+
 ## Karel for CMS
 
 Run 
@@ -38,7 +50,6 @@ This package adds two things
 * Karel languages
 * Karel task type.
 
-A Karel task type is a slightly modified version of a [batch](https://cms.readthedocs.io/en/latest/Task%20types.html#batch) task that changes the task output so Instruction Limit Exceeded and RTE are correctly displayed. 
-
+A Karel task type is a slightly modified version of a [batch](https://cms.readthedocs.io/en/latest/Task%20types.html#batch) task that changes the task output the correct information, like Instruction Limit Exceeded and the type or Runtime Error
 
 

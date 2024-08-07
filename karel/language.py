@@ -34,8 +34,9 @@ class KarelLanguage(Language):
         return [command ]
 
     def get_evaluation_commands(self, executable_filename, main=None, args=None):     
-        command = ["/usr/local/bin/rekarel"]
-        command += ["run", executable_filename]
+        command = ["/usr/local/bin/karel"]
+        # command += ["run"]
+        command += [ executable_filename ]
         # command += ["-i", "world.in"]
         # command += ["-o", "world.out"]
         logger.warn(command)
