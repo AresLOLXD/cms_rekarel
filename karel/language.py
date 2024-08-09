@@ -28,7 +28,6 @@ class KarelLanguage(Language):
     def get_compilation_commands(self, source_filenames, executable_filename, for_evaluation=True):        
         command = ["/usr/local/bin/rekarel"]
         command += ["compile"]
-        print(source_filenames)
         command += source_filenames
         command += ["-o", executable_filename]
         return [command ]
@@ -39,7 +38,6 @@ class KarelLanguage(Language):
         command += [ executable_filename ]
         # command += ["-i", "world.in"]
         # command += ["-o", "world.out"]
-        logger.warn(command)
         return [command]
 
 class KarelPascal(KarelLanguage):
