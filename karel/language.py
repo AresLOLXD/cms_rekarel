@@ -15,7 +15,7 @@ class KarelLanguage(Language):
     
     @property
     def source_extensions(self):
-        return [".kc", ".kj", ".kp", ".txt"]
+        return [".kcode", ".kc", ".kj", ".kp", ".txt"]
     
     @property
     def executable_extension(self):
