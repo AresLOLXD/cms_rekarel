@@ -54,4 +54,21 @@ This package adds two things
 
 A Karel task type is a slightly modified version of a [batch](https://cms.readthedocs.io/en/latest/Task%20types.html#batch) task that changes the task output the correct information, like Instruction Limit Exceeded and the type or Runtime Error
 
+# ReKarel project map
+
+Here's a map for exploring the ReKarel project:
+
+
+| Repo  | Description |
+| --- | --- |
+| [ReKarel](https://github.com/kishtarn555/ReKarel/) | Web IDE for ReKarel | 
+| [Core](https://github.com/kishtarn555/rekarel-core) | JS compiler, interpreter and transpiler |
+| [CLI](https://github.com/kishtarn555/rekarel-cli) | Node command line interface for the core |
+| [CPP Interpreter](https://github.com/kishtarn555/rekarel-cpp-interpreter) | Faster C++ interpreter, runs bytecode compiled by the CLI compiler |
+| [CMS](https://github.com/kishtarn555/cms_rekarel) | Adds ReKarel support to [CMS](https://github.com/cms-dev/cms) |
+| [KarelCaseGenerator](https://github.com/kishtarn555/KarelCaseGenerator/) | Python Case Generator |
+
+![image](https://github.com/user-attachments/assets/a0f155d3-780a-41dd-a2a2-89ebbd04a2b3)
+
+
 
