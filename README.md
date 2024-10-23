@@ -25,7 +25,9 @@ It should be in `/usr/local/bin/rekarel`, otherwise, you'll have to move it.
 
 Next, let's install the interpreter.
 
-Download https://github.com/kishtarn555/rekarel-cpp-interpreter
+Download the C++ VM
+
+https://github.com/kishtarn555/rekarel-cpp-interpreter/releases/tag/v2.0.0
 
 Go to the download/clone folder and run:
 
