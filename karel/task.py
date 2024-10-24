@@ -146,7 +146,7 @@ class KarelTask(Batch):
             elif exit_signal == 19:
                 job.text = [N_("Error de ejecución (La pila de llamadas se desbordó)")]
             elif exit_signal == 20:
-                job.text = [N_("Error de ejecución (Se excedió la memoria de la pila de llamadas)")]
+                job.text = [N_("Límite de memoria (Se excedió la memoria de la pila de llamadas)")]
             elif exit_signal == 21:
                 job.text = [N_("Error de ejecución (Se excedió la cantidad de parámetros permitidos en una llamada)")]
             elif exit_signal == 48:
