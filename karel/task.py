@@ -137,7 +137,9 @@ class KarelTask(Batch):
         job.text = text
         if (stats["exit_status"] == Sandbox.EXIT_NONZERO_RETURN):
             exit_signal = sandbox.get_exit_code()            
-            if exit_signal == 16:
+            if exit_signal == 2:
+                job.text = [N_("Error de juez (El administrador del juez debe revisar la versión de la VM)")]
+            elif exit_signal == 16:
                 job.text = [N_("Error de ejecución (Karel chocó con un muro)")]
             elif exit_signal == 17:
                 job.text = [N_("Error de ejecución (Karel intentó recoger un zumbador de una posición vacía)")]
@@ -149,6 +151,14 @@ class KarelTask(Batch):
                 job.text = [N_("Límite de memoria (Se excedió la memoria de la pila de llamadas)")]
             elif exit_signal == 21:
                 job.text = [N_("Error de ejecución (Se excedió la cantidad de parámetros permitidos en una llamada)")]
+            elif exit_signal == 22:
+                job.text = [N_("Error de ejecución (Un número excedió el límite superior)")]
+            elif exit_signal == 23:
+                job.text = [N_("Error de ejecución (Un número excedió el límite inferior)")]
+            elif exit_signal == 24:
+                job.text = [N_("Error de ejecución (Un montón excedió el límite superior)")]
+            elif exit_signal == 25:
+                job.text = [N_("Error de ejecución (Se excedió el límite superior de la mochila)")]
             elif exit_signal == 48:
                 job.text = [N_("Límite de instrucciones excedido (Demasiadas en general)")]
             elif exit_signal == 49:
