@@ -4,13 +4,14 @@ from abc import abstractmethod
 import logging
 
 logger = logging.getLogger(__name__)
+VERSION = "2.3"
 
 class KarelLanguage(Language):
 
 
     @property
     def name(self):
-        return "Karel (rekarel.1.0.0)"
+        return f"Karel (rekarel v{VERSION})"
     
     
     @property
@@ -30,12 +31,14 @@ class KarelLanguage(Language):
         command += ["compile"]
         command += source_filenames
         command += ["-o", executable_filename]
+        command += ["-e", VERSION]
         return [command ]
 
     def get_evaluation_commands(self, executable_filename, main=None, args=None):     
         command = ["/usr/local/bin/karel"]
         # command += ["run"]
         command += [ executable_filename ]
+        command += [ "-e", VERSION ]
         # command += ["-i", "world.in"]
         # command += ["-o", "world.out"]
         return [command]
@@ -43,7 +46,7 @@ class KarelLanguage(Language):
 class KarelPascal(KarelLanguage):
     @property
     def name(self):
-        return "Karel Pascal (rekarel.1.0.0)"
+        return "Karel Pascal (rekarel v{VERSION})"
 
     @property
     def source_extensions(self):
@@ -53,7 +56,7 @@ class KarelJava(KarelLanguage):
 
     @property
     def name(self):
-        return "Karel Java (rekarel.1.0.0)"
+        return "Karel Java (rekarel v{VERSION})"
 
     @property
     def source_extensions(self):
