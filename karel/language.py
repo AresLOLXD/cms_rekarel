@@ -7,11 +7,9 @@ logger = logging.getLogger(__name__)
 VERSION = "2.3"
 
 class KarelLanguage(Language):
-
-
     @property
     def name(self):
-        return f"Karel (rekarel v{VERSION})"
+        return f"Karel {VERSION} / rekarel-cli"
     
     
     @property
@@ -25,20 +23,27 @@ class KarelLanguage(Language):
     @property
     def requires_multithreading(self):
         return True
+    
+    
+    @property
+    def checksKarelVersion(self):
+        return True
 
     def get_compilation_commands(self, source_filenames, executable_filename, for_evaluation=True):        
         command = ["/usr/local/bin/rekarel"]
         command += ["compile"]
         command += source_filenames
         command += ["-o", executable_filename]
-        command += ["-e", VERSION]
+        if self.checksKarelVersion():
+            command += ["-e", VERSION]
         return [command ]
 
     def get_evaluation_commands(self, executable_filename, main=None, args=None):     
         command = ["/usr/local/bin/karel"]
         # command += ["run"]
         command += [ executable_filename ]
-        command += [ "-e", VERSION ]
+        if self.checksKarelVersion():
+            command += [ "-e", VERSION ]
         # command += ["-i", "world.in"]
         # command += ["-o", "world.out"]
         return [command]
@@ -46,7 +51,7 @@ class KarelLanguage(Language):
 class KarelPascal(KarelLanguage):
     @property
     def name(self):
-        return "Karel Pascal (rekarel v{VERSION})"
+        return f"Karel Pascal {VERSION} / rekarel-cli"
 
     @property
     def source_extensions(self):
@@ -56,8 +61,22 @@ class KarelJava(KarelLanguage):
 
     @property
     def name(self):
-        return "Karel Java (rekarel v{VERSION})"
+        return f"Karel Java {VERSION} / rekarel-cli"
 
     @property
     def source_extensions(self):
         return [".kj"]
+
+class OldKarelLanguage(KarelLanguage):
+    """
+        Deprecated, this is kept for compatibility and it will be kept until august 2025
+    """
+    @property
+    def name(self):
+        return "Karel (rekarel.1.0.0)"
+    
+    
+    @property
+    def checksKarelVersion(self):
+        # This ensures compatibility with old compilers and runtimes
+        return False
