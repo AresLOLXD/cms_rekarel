@@ -7,11 +7,9 @@ logger = logging.getLogger(__name__)
 VERSION = "2.3"
 
 class KarelLanguage(Language):
-
-
     @property
     def name(self):
-        return f"Karel (rekarel v{VERSION})"
+        return f"Karel / rekarel-cli"
     
     
     @property
@@ -46,7 +44,7 @@ class KarelLanguage(Language):
 class KarelPascal(KarelLanguage):
     @property
     def name(self):
-        return "Karel Pascal (rekarel v{VERSION})"
+        return "Karel Pascal / rekarel-cli"
 
     @property
     def source_extensions(self):
@@ -56,8 +54,16 @@ class KarelJava(KarelLanguage):
 
     @property
     def name(self):
-        return "Karel Java (rekarel v{VERSION})"
+        return "Karel Java / rekarel-cli"
 
     @property
     def source_extensions(self):
         return [".kj"]
+
+class OldKarelLanguage(KarelLanguage):
+    """
+        Deprecated, this is kept for compatibility and it will be kept until august 2025
+    """
+    @property
+    def name(self):
+        return "Karel (rekarel.1.0.0)"
