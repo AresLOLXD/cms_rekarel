@@ -9,7 +9,7 @@ VERSION = "2.3"
 class KarelLanguage(Language):
     @property
     def name(self):
-        return f"Karel / rekarel-cli"
+        return f"Karel {VERSION} / rekarel-cli"
     
     
     @property
@@ -51,7 +51,7 @@ class KarelLanguage(Language):
 class KarelPascal(KarelLanguage):
     @property
     def name(self):
-        return "Karel Pascal / rekarel-cli"
+        return f"Karel Pascal {VERSION} / rekarel-cli"
 
     @property
     def source_extensions(self):
@@ -61,7 +61,7 @@ class KarelJava(KarelLanguage):
 
     @property
     def name(self):
-        return "Karel Java / rekarel-cli"
+        return f"Karel Java {VERSION} / rekarel-cli"
 
     @property
     def source_extensions(self):
