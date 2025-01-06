@@ -34,7 +34,7 @@ class KarelLanguage(Language):
         command += ["compile"]
         command += source_filenames
         command += ["-o", executable_filename]
-        if self.checksKarelVersion():
+        if self.checksKarelVersion:
             command += ["-e", VERSION]
         return [command ]
 
@@ -42,7 +42,7 @@ class KarelLanguage(Language):
         command = ["/usr/local/bin/karel"]
         # command += ["run"]
         command += [ executable_filename ]
-        if self.checksKarelVersion():
+        if self.checksKarelVersion:
             command += [ "-e", VERSION ]
         # command += ["-i", "world.in"]
         # command += ["-o", "world.out"]
