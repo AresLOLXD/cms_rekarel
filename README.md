@@ -8,7 +8,7 @@ This adds support for Karel Java and Karel Pascal as used by the [Mexican Olimpi
 
 The Karel language `Karel (rekarel.1.0.0)` is deprecated and is kept for compatibility purposes. It will be deleted after August 2025.
 
-Both languages compile and run mostly the same and target the same language (ReKarel 2.3), this is the reason as to why Karel (rekarel 1.0.0) is deprecated, due to it's poor name.
+Both languages compile and run the same language (ReKarel 2.3), this is the reason as to why Karel (rekarel 1.0.0) is deprecated, due to it's poor name.
 
 However, deleting a language from a CMS causes internal errors and as such, it is kept to give time to consumers to plan their migration.
 
