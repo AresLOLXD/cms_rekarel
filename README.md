@@ -36,7 +36,7 @@ Next, let's install the interpreter.
 
 Download the C++ VM
 
-https://github.com/kishtarn555/rekarel-cpp-interpreter/releases/tag/v2.0.0
+https://github.com/kishtarn555/rekarel-cpp-interpreter/releases/tag/v2.3.1
 
 Go to the download/clone folder and run:
 
