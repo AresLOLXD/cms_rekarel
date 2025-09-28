@@ -3,34 +3,35 @@ from cms.grading.steps.messages import HumanMessage
 # Dummy function to mark translatable strings
 
 
-
 import logging
 import os
 
 from cms.grading.languagemanager import LANGUAGES, get_language
-from cms.grading.steps import evaluation_step, \
-    human_evaluation_message
-from cms.grading.tasktypes import check_executables_number, \
-    create_sandbox, delete_sandbox, eval_output
+from cms.grading.steps import evaluation_step, human_evaluation_message
+from cms.grading.tasktypes import (
+    check_executables_number,
+    create_sandbox,
+    delete_sandbox,
+    eval_output,
+)
 from cms.grading.Sandbox import Sandbox
 
 logger = logging.getLogger(__name__)
+
 
 def N_(message):
     return message
 
 
-
 class KarelTask(Batch):
-
     def __init__(self, parameters):
         super().__init__(parameters)
 
     @property
     def name(self):
         return "Karel"
-    
-    def evaluate(self, job, file_cacher):        
+
+    def evaluate(self, job, file_cacher):
         """Implements mostrly Batch.evaluate. See TaskType.evaluate."""
         if not check_executables_number(job, 1):
             return
@@ -38,16 +39,16 @@ class KarelTask(Batch):
         # Prepare the execution
         executable_filename = next(iter(job.executables.keys()))
         language = get_language(job.language)
-        main = self.GRADER_BASENAME if self._uses_grader() \
-               else os.path.splitext(executable_filename)[0]
-        commands = language.get_evaluation_commands(
-            executable_filename, main=main)
+        main = (
+            self.GRADER_BASENAME
+            if self._uses_grader()
+            else os.path.splitext(executable_filename)[0]
+        )
+        commands = language.get_evaluation_commands(executable_filename, main=main)
         executables_to_get = {
             executable_filename: job.executables[executable_filename].digest
         }
-        files_to_get = {
-            self._actual_input: job.input
-        }
+        files_to_get = {self._actual_input: job.input}
 
         # Check which redirect we need to perform, and in case we don't
         # manage the output via redirect, the submission needs to be able
@@ -81,7 +82,8 @@ class KarelTask(Batch):
             writable_files=files_allowing_write,
             stdin_redirect=stdin_redirect,
             stdout_redirect=stdout_redirect,
-            multiprocess=job.multithreaded_sandbox)
+            multiprocess=job.multithreaded_sandbox,
+        )
 
         outcome = None
         text = None
@@ -99,12 +101,10 @@ class KarelTask(Batch):
 
         # Otherwise, advance to checking the solution
         else:
-
             # Check that the output file was created
             if not sandbox.file_exists(self._actual_output):
                 outcome = 0.0
-                text = [N_("Evaluation didn't produce file %s"),
-                        self._actual_output]
+                text = [N_("Evaluation didn't produce file %s"), self._actual_output]
                 if job.get_output:
                     job.user_output = None
 
@@ -114,7 +114,8 @@ class KarelTask(Batch):
                     job.user_output = sandbox.get_file_to_storage(
                         self._actual_output,
                         "Output file in job %s" % job.info,
-                        trunc_len=100 * 1024)
+                        trunc_len=100 * 1024,
+                    )
 
                 # If just asked to execute, fill text and set dummy outcome.
                 if job.only_execution:
@@ -124,51 +125,89 @@ class KarelTask(Batch):
                 # Otherwise evaluate the output file.
                 else:
                     box_success, outcome, text = eval_output(
-                        file_cacher, job,
-                        self.CHECKER_CODENAME
-                        if self._uses_checker() else None,
-                        user_output_path=sandbox.relative_path(
-                            self._actual_output),
-                        user_output_filename=self.output_filename)
+                        file_cacher,
+                        job,
+                        self.CHECKER_CODENAME if self._uses_checker() else None,
+                        user_output_path=sandbox.relative_path(self._actual_output),
+                        user_output_filename=self.output_filename,
+                    )
 
         # Fill in the job with the results.
         job.success = box_success
         job.outcome = str(outcome) if outcome is not None else None
         job.text = text
-        if (stats["exit_status"] == Sandbox.EXIT_NONZERO_RETURN):
-            exit_signal = sandbox.get_exit_code()            
+        if stats["exit_status"] == Sandbox.EXIT_NONZERO_RETURN:
+            exit_signal = sandbox.get_exit_code()
             if exit_signal == 2:
-                job.text = [N_("Error de juez (El administrador del juez debe revisar la versión de la VM)")]
+                job.text = [
+                    N_(
+                        "Error de juez (El administrador del juez debe revisar la versión de la VM)"
+                    )
+                ]
             elif exit_signal == 16:
                 job.text = [N_("Error de ejecución (Karel chocó con un muro)")]
             elif exit_signal == 17:
-                job.text = [N_("Error de ejecución (Karel intentó recoger un zumbador de una posición vacía)")]
+                job.text = [
+                    N_(
+                        "Error de ejecución (Karel intentó recoger un zumbador de una posición vacía)"
+                    )
+                ]
             elif exit_signal == 18:
-                job.text = [N_("Error de ejecución (Karel intentó dejar un zumbador con su mochila vacía)")]
+                job.text = [
+                    N_(
+                        "Error de ejecución (Karel intentó dejar un zumbador con su mochila vacía)"
+                    )
+                ]
             elif exit_signal == 19:
                 job.text = [N_("Error de ejecución (La pila de llamadas se desbordó)")]
             elif exit_signal == 20:
-                job.text = [N_("Límite de memoria (Se excedió la memoria de la pila de llamadas)")]
+                job.text = [
+                    N_(
+                        "Límite de memoria (Se excedió la memoria de la pila de llamadas)"
+                    )
+                ]
             elif exit_signal == 21:
-                job.text = [N_("Error de ejecución (Se excedió la cantidad de parámetros permitidos en una llamada)")]
+                job.text = [
+                    N_(
+                        "Error de ejecución (Se excedió la cantidad de parámetros permitidos en una llamada)"
+                    )
+                ]
             elif exit_signal == 22:
-                job.text = [N_("Error de ejecución (Un número excedió el límite superior)")]
+                job.text = [
+                    N_("Error de ejecución (Un número excedió el límite superior)")
+                ]
             elif exit_signal == 23:
-                job.text = [N_("Error de ejecución (Un número excedió el límite inferior)")]
+                job.text = [
+                    N_("Error de ejecución (Un número excedió el límite inferior)")
+                ]
             elif exit_signal == 24:
-                job.text = [N_("Error de ejecución (Un montón excedió el límite superior)")]
+                job.text = [
+                    N_("Error de ejecución (Un montón excedió el límite superior)")
+                ]
             elif exit_signal == 25:
-                job.text = [N_("Error de ejecución (Se excedió el límite superior de la mochila)")]
+                job.text = [
+                    N_(
+                        "Error de ejecución (Se excedió el límite superior de la mochila)"
+                    )
+                ]
             elif exit_signal == 48:
-                job.text = [N_("Límite de instrucciones excedido (Demasiadas en general)")]
+                job.text = [
+                    N_("Límite de instrucciones excedido (Demasiadas en general)")
+                ]
             elif exit_signal == 49:
-                job.text = [N_("Límite de instrucciones excedido (Demasiadas izquierdas)")]
+                job.text = [
+                    N_("Límite de instrucciones excedido (Demasiadas izquierdas)")
+                ]
             elif exit_signal == 50:
                 job.text = [N_("Límite de instrucciones excedido (Demasiados avanzas)")]
             elif exit_signal == 51:
-                job.text = [N_("Límite de instrucciones excedido (Demasiados coge-zumbadores)")]
+                job.text = [
+                    N_("Límite de instrucciones excedido (Demasiados coge-zumbadores)")
+                ]
             elif exit_signal == 52:
-                job.text = [N_("Límite de instrucciones excedido (Demasiados deja-zumbadores)")]
+                job.text = [
+                    N_("Límite de instrucciones excedido (Demasiados deja-zumbadores)")
+                ]
         job.plus = stats
 
-        delete_sandbox(sandbox, job.success, job.keep_sandbox)
+        delete_sandbox(sandbox, job, job.success)
