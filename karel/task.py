@@ -87,6 +87,7 @@ class KarelTask(Batch):
 
         outcome = None
         text = None
+        admin_text = None
 
         # Error in the sandbox: nothing to do!
         if not box_success:
@@ -125,7 +126,7 @@ class KarelTask(Batch):
 
                 # Otherwise evaluate the output file.
                 else:
-                    box_success, outcome, text = eval_output(
+                    box_success, outcome, text, admin_text = eval_output(
                         file_cacher,
                         job,
                         self.CHECKER_CODENAME if self._uses_checker() else None,
@@ -209,6 +210,7 @@ class KarelTask(Batch):
                 job.text = [
                     N_("Límite de instrucciones excedido (Demasiados deja-zumbadores)")
                 ]
+        job.admin_text = admin_text
         job.plus = stats
 
         delete_sandbox(sandbox, job, file_cacher)
