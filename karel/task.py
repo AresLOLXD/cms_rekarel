@@ -69,9 +69,9 @@ class KarelTask(Batch):
 
         # Put the required files into the sandbox
         for filename, digest in executables_to_get.items():
-            sandbox.create_file_from_storage(filename, digest, executable=True)
+            sandbox.create_file_from_storage(filename, digest, file_cacher, executable=True)
         for filename, digest in files_to_get.items():
-            sandbox.create_file_from_storage(filename, digest)
+            sandbox.create_file_from_storage(filename, digest, file_cacher)
 
         # Actually performs the execution
         box_success, evaluation_success, stats = evaluation_step(
@@ -113,6 +113,7 @@ class KarelTask(Batch):
                 if job.get_output:
                     job.user_output = sandbox.get_file_to_storage(
                         self._actual_output,
+                        file_cacher,
                         "Output file in job %s" % job.info,
                         trunc_len=100 * 1024,
                     )
