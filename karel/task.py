@@ -64,7 +64,7 @@ class KarelTask(Batch):
             files_allowing_write.append(self._actual_output)
 
         # Create the sandbox
-        sandbox = create_sandbox(file_cacher, name="evaluate")
+        sandbox = create_sandbox(0, file_cacher, name="evaluate")
         job.sandboxes.append(sandbox.get_root_path())
 
         # Put the required files into the sandbox
@@ -210,4 +210,4 @@ class KarelTask(Batch):
                 ]
         job.plus = stats
 
-        delete_sandbox(sandbox, job, job.success)
+        delete_sandbox(sandbox, job, file_cacher)
